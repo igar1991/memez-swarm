@@ -144,7 +144,7 @@ class MainPage extends React.Component {
   render() {
     const image = photos[this.state.currentImage];
     const base_image = new Image();
-    base_image.src = image.src.replace("./", "/");
+    base_image.src = image.src;
     let wrh = base_image.width / base_image.height;
     let newWidth = 400;
     console.log(base_image.width, base_image.height)
