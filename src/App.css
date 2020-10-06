@@ -17,7 +17,6 @@ html, body {
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-
   background: #666 !important;
   outline: none !important;
   border: none !important;
@@ -39,7 +38,9 @@ html, body {
 .meme-gen-modal {
   max-width: fit-content;
 }
-
+.modal-content {
+  width: 150% !important
+}
 .modal-body {
   display: flex;
   border-radius: 0px;
@@ -90,7 +91,6 @@ html, body {
   margin-right: 7.5px;
   padding: 20px;
   max-width: 300px;
-  background-color: blue;
 }
 
 .sidebar p {
@@ -110,7 +110,6 @@ html, body {
 }
 
 .meme-bottom-caption {
-  background-color: blue;
   position: absolute;
   font-size: 20px;
   display: block;
@@ -122,10 +121,10 @@ html, body {
   padding: 5px;
   color: #fff;
   letter-spacing: 1px;
+  background: linear-gradient(to left, rgb(51, 51, 51), rgba(51, 51, 51, 0.81));
 }
 
 .meme-top-caption {
-  background-color: blue;
   position: absolute;
   font-size: 20px;
   display: block;
@@ -137,4 +136,5 @@ html, body {
   padding: 5px;
   color: #fff;
   letter-spacing: 1px;
+  background: linear-gradient(to left, rgb(51, 51, 51), rgba(51, 51, 51, 0.81));
 }

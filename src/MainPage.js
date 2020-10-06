@@ -4,9 +4,9 @@ import './App.css';
 
 
 const photos = [
-  { src: '/images/dank.png' },
-  { src: '/images/dank.png' },
-  { src: '/images/dank.png' }
+  { src: './images/dank.png' },
+  { src: './images/band.png' }
+
 ];
 
 
@@ -144,10 +144,12 @@ class MainPage extends React.Component {
   render() {
     const image = photos[this.state.currentImage];
     const base_image = new Image();
-    base_image.src = image.src;
-    var wrh = base_image.width / base_image.height;
-    var newWidth = 600;
-    var newHeight = newWidth / wrh;
+    base_image.src = image.src.replace("./", "/");
+    let wrh = base_image.width / base_image.height;
+    let newWidth = 400;
+    console.log(base_image.width, base_image.height)
+    let newHeight = newWidth / wrh;
+    console.log(newWidth, newHeight)
     const textStyle = {
       fontFamily: "Impact",
       fontSize: "50px",
@@ -177,7 +179,7 @@ Click on the desired template and you can add upper and lower text to the meme-t
                     height: "100%"
                   }}
                   alt={index}
-                  src={image.src}
+                  src={image.src.replace("./", "/")}
                   onClick={() => this.openImage(index)}
                   role="presentation"
                 />
@@ -189,10 +191,12 @@ Click on the desired template and you can add upper and lower text to the meme-t
         <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
           <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
           <ModalBody>
+    
             <svg
-              width={newWidth}
+              
               id="svg_ref"
               height={newHeight}
+              width={newWidth}
               ref={el => { this.svgRef = el }}
               xmlns="http://www.w3.org/2000/svg"
               xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -225,6 +229,7 @@ Click on the desired template and you can add upper and lower text to the meme-t
                   {this.state.bottomtext}
               </text>
             </svg>
+          
             <div className="meme-form">
               <FormGroup>
                 <Label for="toptext">Top Text</Label>
