@@ -35,7 +35,7 @@ class MainPage extends React.Component {
   openImage = (index) => {
     const image = photos[index];
     const base_image = new Image();
-    base_image.src = image.src.replace("./", "/");
+    base_image.src = image.src;
     const base64 = this.getBase64Image(base_image);
     this.setState(prevState => ({
       currentImage: index,
@@ -179,7 +179,7 @@ Click on the desired template and you can add upper and lower text to the meme-t
                     height: "100%"
                   }}
                   alt={index}
-                  src={image.src.replace("./", "/")}
+                  src={image.src}
                   onClick={() => this.openImage(index)}
                   role="presentation"
                 />
