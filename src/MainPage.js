@@ -35,7 +35,7 @@ class MainPage extends React.Component {
   openImage = (index) => {
     const image = photos[index];
     const base_image = new Image();
-    base_image.src = image.src;
+    base_image.src = image.src.replace("./", "/");
     const base64 = this.getBase64Image(base_image);
     this.setState(prevState => ({
       currentImage: index,
