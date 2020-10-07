@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand } from 'reactstrap';
-import './App.css';
+import '../App.css';
 
 
 const photos = [
@@ -162,12 +162,6 @@ class MainPage extends React.Component {
     return (
       <div>
         <div className="main-content">
-          <div className="sidebar">
-            <NavbarBrand href="/">Meme generator</NavbarBrand>
-            
-            <p>
-Click on the desired template and you can add upper and lower text to the meme-template, move the text and save the image by loading it.            </p>
-          </div>
           <div className="content">
             {photos.map((image, index) => (
               <div className="image-holder" key={image.src}>

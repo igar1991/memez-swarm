@@ -84,24 +84,6 @@ html, body {
   display: flex;
 }
 
-.sidebar {
-  min-width: 300px;
-  background: #333333;
-  min-height: 100vh;
-  margin-right: 7.5px;
-  padding: 20px;
-  max-width: 300px;
-}
-
-.sidebar p {
-  margin-bottom: 30px;
-  font-size: 15.12px;
-  display: inline-block;
-  color: #fff;
-  letter-spacing: 1px;
-  font-weight: 300;
-  text-align: center;
-}
 
 .content {
   display: flex;
