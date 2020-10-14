@@ -161,13 +161,50 @@ class MainPage extends React.Component {
     };
   };
 
+  uploadToSwarm = ()=>{
+    const svg = this.svgRef;
+    let svgData = new XMLSerializer().serializeToString(svg);
+    //console.log(svgData);
+    const formData = new FormData();
+    //formData.append("meme.jpg", svgData);
+    //const converted = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
+    
+    const img = document.createElement("img");
+    img.setAttribute(
+      "src",
+      "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
+    );
+
+    console.log(img)
+    formData.append("file", new Blob([img],{type: 'image/png'}), 'meme.png');
+    
+    const url = "https://gateway.ethswarm.org/files";
+     fetch(url, {
+      method: 'POST',
+      body: formData
+    })
+    .then(data=>data.json())
+    .then(data=>{
+      console.log(data.reference);
+      // result url: https://gateway.ethswarm.org/files/cd661574c2d25f3e561cd9cc20fe04b142fc92e1a5b34bdd03922cbf38205c20
+      setTimeout(_=>{
+        fetch('https://gateway.ethswarm.org/files/'+data.reference)
+      .then(data=>data.text())
+      .then(data=>{
+        this.props.setMeme(data);
+        console.log(data)
+      })
+      },15000);
+    });
+  };
+
   getBase64Image(img) {
-    var canvas = document.createElement("canvas");
+    let canvas = document.createElement("canvas");
     canvas.width = img.width;
     canvas.height = img.height;
-    var ctx = canvas.getContext("2d");
+    let ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0);
-    var dataURL = canvas.toDataURL("image/png");
+    let dataURL = canvas.toDataURL("image/png");
     return dataURL;
   }
 
@@ -284,10 +321,16 @@ class MainPage extends React.Component {
                 Download to Device
               </button>
               <button
-                onClick={() => this.convertSvgToImage()}
+                onClick={() => this.uploadToSwarm()}
                 className="btn btn-primary"
               >
-                Download to Swarm
+                Upload to Swarm
+              </button>
+              <button
+                onClick={() => this.props.setMeme(<h1>Mememe3</h1>)}
+                className="btn btn-primary"
+              >
+                Upload to Swarm
               </button>
             </div>
           </ModalBody>

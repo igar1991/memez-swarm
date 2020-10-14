@@ -1,10 +1,16 @@
 import React from "react";
 
-const MyMeme =()=> {
+
+const MyMeme =(props)=> {
+    function createMarkup() {
+        console.log(`${props.arraymeme[0]}`)
+        return {__html: `${props.arraymeme[0]}`};
+      }
+      
+
     return (
-        <div>
-            <h1>Hel</h1>
-        </div>
+        <div dangerouslySetInnerHTML={createMarkup()} />
+           
     )
 }
 

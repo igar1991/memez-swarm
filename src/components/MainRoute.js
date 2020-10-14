@@ -5,11 +5,11 @@ import { Switch, Route } from 'react-router-dom'
 
 
 
-const MainRoute =()=> (
+const MainRoute =(props)=> (
     <main>
     <Switch>
-      <Route exact path='/' component={MainPage}/>
-      <Route path='/mymeme' component={MyMeme}/>
+      <Route exact path='/' component={()=><MainPage {...props} />} />
+      <Route path='/mymeme' component={()=><MyMeme {...props} />}/>
     </Switch>
   </main>
 )

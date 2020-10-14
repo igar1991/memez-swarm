@@ -6,10 +6,17 @@ import "./App.css";
 import MainRoute from "./components/MainRoute";
 
 const App = () => {
+
+  const [arraymeme, setArraymeme] = useState([<h1>Hello1</h1>])
+
+  const setMeme =(object)=>{
+    setArraymeme([object,...arraymeme])
+  }
+
   return (
     <div>
       <NavBar />
-      <MainRoute />
+      <MainRoute arraymeme={arraymeme} setMeme={setMeme} />
 
     </div>
   );
