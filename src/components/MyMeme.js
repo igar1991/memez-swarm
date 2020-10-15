@@ -1,17 +1,25 @@
 import React from "react";
 
+const MyMeme = (props) => {
 
-const MyMeme =(props)=> {
-    function createMarkup() {
-        console.log(`${props.arraymeme[0]}`)
-        return {__html: `${props.arraymeme[0]}`};
-      }
-      
-
-    return (
-        <div dangerouslySetInnerHTML={createMarkup()} />
-           
-    )
-}
+  return (
+    <div>
+      <div className="main-content">
+        <div className="content">
+          {props.arraymeme.map((image, index) => (
+            <div className="image-holder" key={image.src}>
+              <img
+                className="image-con"
+                alt={index}
+                src={image.src}
+                role="presentation"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default MyMeme;

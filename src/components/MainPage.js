@@ -32,7 +32,7 @@ const photos = [
   { src: "./images/Waiting-Skeleton.jpg" },
   { src: "./images/Who-Killed-Hannibal.jpg" },
   { src: "./images/Woman-Yelling-At-Cat.jpg" },
-  { src: "./images/X-X-Everywhere.jpg" }
+  { src: "./images/X-X-Everywhere.jpg" },
 ];
 
 const initialState = {
@@ -161,41 +161,70 @@ class MainPage extends React.Component {
     };
   };
 
-  uploadToSwarm = ()=>{
+  uploadToSwarm = () => {
+    const self=this
     const svg = this.svgRef;
     let svgData = new XMLSerializer().serializeToString(svg);
-    //console.log(svgData);
-    const formData = new FormData();
-    //formData.append("meme.jpg", svgData);
-    //const converted = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
-    
+
+    const canvas = document.createElement("canvas");
+    canvas.setAttribute("id", "canvas");
+    const svgSize = svg.getBoundingClientRect();
+    canvas.width = svgSize.width;
+    canvas.height = svgSize.height;
     const img = document.createElement("img");
     img.setAttribute(
       "src",
       "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
     );
+    img.onload = function () {
+      canvas.getContext("2d").drawImage(img, 0, 0);
+      canvas.toBlob(function (blob) {
+        // Do something with the blob object,
+        // e.g. create multipart form data for file uploads:
+        var formData = new FormData();
+        formData.append("file", blob, "image.jpg");
+        const url = "https://gateway.ethswarm.org/files";
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        })
+          .then((data) => data.json())
+          .then((data) => {
+            console.log(data.reference);
+            // result url: https://gateway.ethswarm.org/files/cd661574c2d25f3e561cd9cc20fe04b142fc92e1a5b34bdd03922cbf38205c20
+            
+              // fetch("https://gateway.ethswarm.org/files/" + data.reference)
+              //   .then((data) => data.text())
+              //   .then((data) => {
+              //     self.props.setMeme(
+              //       "https://gateway.ethswarm.org/files/"
+              //     );
+              //     console.log(data);
+              //   });
+              self.props.setMeme(
+                      "https://gateway.ethswarm.org/files/"+data.reference
+                    );
+            
+          });
+      }, "image/jpeg");
+      /*const canvasdata = canvas.toDataURL("image/png");
+      const a = document.createElement("a");
+      a.download = "meme.png";
+      a.href = canvasdata;
+      document.body.appendChild(a);
+      a.click();*/
+    };
 
-    console.log(img)
-    formData.append("file", new Blob([img],{type: 'image/png'}), 'meme.png');
-    
-    const url = "https://gateway.ethswarm.org/files";
-     fetch(url, {
-      method: 'POST',
-      body: formData
-    })
-    .then(data=>data.json())
-    .then(data=>{
-      console.log(data.reference);
-      // result url: https://gateway.ethswarm.org/files/cd661574c2d25f3e561cd9cc20fe04b142fc92e1a5b34bdd03922cbf38205c20
-      setTimeout(_=>{
-        fetch('https://gateway.ethswarm.org/files/'+data.reference)
-      .then(data=>data.text())
-      .then(data=>{
-        this.props.setMeme(data);
-        console.log(data)
-      })
-      },15000);
-    });
+    //console.log(svgData);
+    //const formData = new FormData();
+    //formData.append("meme.jpg", svgData);
+    //const converted = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
+
+    /*formData.append(
+      "file",
+      new Blob([unescape(encodeURIComponent(svgData))], { type: "image/png" }),
+      "meme.png"
+    );*/
   };
 
   getBase64Image(img) {
@@ -327,10 +356,10 @@ class MainPage extends React.Component {
                 Upload to Swarm
               </button>
               <button
-                onClick={() => this.props.setMeme(<h1>Mememe3</h1>)}
+                onClick={() => this.props.setMeme("1")}
                 className="btn btn-primary"
               >
-                Upload to Swarm
+                test
               </button>
             </div>
           </ModalBody>

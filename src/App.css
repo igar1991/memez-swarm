@@ -4,7 +4,9 @@ html, body {
   background: #fff;
   color: #666;
 }
-
+.hello {
+  width: 100%;
+}
 .btn-primary {
   background: #666 !important;
   border: none !important;
