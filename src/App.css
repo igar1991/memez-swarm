@@ -7,6 +7,20 @@ html, body {
 .hello {
   width: 100%;
 }
+.modal-dialog {
+  width: max-content !important;
+  max-width: 1000px !important; 
+}
+
+.test1 {
+  height: 500px;
+  background-color: #000000;
+  width: 1000px;
+}
+.test2 {
+  background-color: aqua;
+  width: 200px;
+}
 .btn-primary {
   background: #666 !important;
   border: none !important;
@@ -50,11 +64,7 @@ html, body {
 .meme-gen-modal {
   max-width: fit-content;
 }
-.modal-content {
- 
-  width: 150% !important;
-  
-}
+
 .modal-body {
   display: flex;
   border-radius: 0px;

@@ -17,18 +17,18 @@ const NavBar = () => {
 
   return (
     <Navbar color="dark" light expand="md">
-      <NavbarBrand href="/">MemeZzz</NavbarBrand>
+      <NavbarBrand>MemeZzz</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavItem>
+          <NavItem active>
             <Link to="/">Template</Link>
           </NavItem>
           <NavItem>
             <Link to="/mymeme">My memeZzz</Link>
           </NavItem>
         </Nav>
-        <NavbarText>Click on the template and create memes</NavbarText>
+        <NavbarText>Click on the template and create memes!</NavbarText>
       </Collapse>
     </Navbar>
   );

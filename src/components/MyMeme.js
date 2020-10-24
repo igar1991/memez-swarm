@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, ModalHeader, ModalBody, FormGroup, Label } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, Button, ModalFooter } from "reactstrap";
 
 const MyMeme = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -13,14 +13,21 @@ const MyMeme = (props) => {
   const openImage = (index) => {
     setModalIsOpen(!modalIsOpen);
     setCurrentIndex(index);
-    setCurrentImage(props.arraymeme[index].src)
+    setCurrentImage(props.arraymeme[index].src);
+  };
+
+  const copyLink = (link) => {
+    navigator.clipboard.writeText(link).then(
+      function () {},
+      function () {}
+    );
   };
 
   return (
     <div>
       <div className="main-content">
         <div className="content">
-  {props.arraymeme.map((image, index) => (
+          {props.arraymeme.map((image, index) => (
             <div className="image-holder" key={image.src}>
               <img
                 className="image-con"
@@ -33,42 +40,20 @@ const MyMeme = (props) => {
           ))}
         </div>
       </div>
-      <Modal className="meme-gen-modal" isOpen={modalIsOpen}>
-        <ModalHeader toggle={toggle}>Make-a-Meme</ModalHeader>
+      <Modal isOpen={modalIsOpen} toggle={toggle}>
+        <ModalHeader toggle={toggle}>My-Meme</ModalHeader>
         <ModalBody>
-          <div className="image-holder">
-          <img
-           className="image-con"
-            alt={currentIndex}
-            src={currentImage}
-            role="presentation"
-
-            
-          />
-          </div>
-          <div className="meme-form">
-            <FormGroup></FormGroup>
-            <button
-              onClick={() => console.log("1")}
-              className="btn btn-primary"
-            >
-              Download to Device
-            </button>
-            <button
-              onClick={() => console.log("2")}
-              className="btn btn-primary"
-            >
-              Upload to Swarm
-            </button>
-          </div>
+          <img alt={currentIndex} src={currentImage} role="presentation" />
         </ModalBody>
+        <ModalFooter>
+          <Button color="danger" onClick={() => props.deleteMeme(currentImage)}>
+            Delete
+          </Button>
+          <Button color="success" onClick={() => copyLink(currentImage)}>
+            Copy link
+          </Button>
+        </ModalFooter>
       </Modal>
-      <button
-              onClick={() => console.log(props.arraymeme[currentImage].src, currentImage)}
-              className="btn btn-primary"
-            >
-              Download to Device
-            </button>
     </div>
   );
 };

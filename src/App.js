@@ -7,7 +7,7 @@ import MainRoute from "./components/MainRoute";
 
 const App = () => {
 
-  
+  const ar = [{src:1},{src:2},{src:3},{src:4}]
 
   const [arraymeme, setArraymeme] = useState([])
 
@@ -16,6 +16,15 @@ const App = () => {
     setArraymeme(array)
     console.log(arraymeme)
     localStorage.setItem('meme',JSON.stringify(array))
+  }
+
+  const deleteMeme = (meme)=> {
+    const array = arraymeme.filter(item=>item.src !==  meme )
+    setArraymeme(array)
+    console.log(arraymeme)
+    localStorage.setItem('meme',JSON.stringify(array))
+    console.log(meme)
+    
   }
   useEffect(() => {
     if(localStorage.getItem('meme')) {
@@ -30,7 +39,7 @@ const App = () => {
   return (
     <div>
       <NavBar />
-      <MainRoute arraymeme={arraymeme} setMeme={setMeme} />
+      <MainRoute arraymeme={arraymeme} setMeme={setMeme} deleteMeme={deleteMeme} />
 
     </div>
   );

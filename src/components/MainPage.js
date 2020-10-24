@@ -253,8 +253,6 @@ class MainPage extends React.Component {
     img.onload = function () {
       canvas.getContext("2d").drawImage(img, 0, 0);
       canvas.toBlob(function (blob) {
-        // Do something with the blob object,
-        // e.g. create multipart form data for file uploads:
         var formData = new FormData();
         formData.append("file", blob, "image.jpg");
         const url = "https://gateway.ethswarm.org/files";
@@ -264,41 +262,13 @@ class MainPage extends React.Component {
         })
           .then((data) => data.json())
           .then((data) => {
-            console.log(data.reference);
-            // result url: https://gateway.ethswarm.org/files/cd661574c2d25f3e561cd9cc20fe04b142fc92e1a5b34bdd03922cbf38205c20
-            
-              // fetch("https://gateway.ethswarm.org/files/" + data.reference)
-              //   .then((data) => data.text())
-              //   .then((data) => {
-              //     self.props.setMeme(
-              //       "https://gateway.ethswarm.org/files/"
-              //     );
-              //     console.log(data);
-              //   });
               self.props.setMeme(
                       "https://gateway.ethswarm.org/files/"+data.reference
                     );
             
           });
       }, "image/jpeg");
-      /*const canvasdata = canvas.toDataURL("image/png");
-      const a = document.createElement("a");
-      a.download = "meme.png";
-      a.href = canvasdata;
-      document.body.appendChild(a);
-      a.click();*/
     };
-
-    //console.log(svgData);
-    //const formData = new FormData();
-    //formData.append("meme.jpg", svgData);
-    //const converted = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
-
-    /*formData.append(
-      "file",
-      new Blob([unescape(encodeURIComponent(svgData))], { type: "image/png" }),
-      "meme.png"
-    );*/
   };
 
   getBase64Image(img) {
@@ -346,7 +316,7 @@ class MainPage extends React.Component {
             ))}
           </div>
         </div>
-        <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
+        <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
           <ModalBody>
             <svg
