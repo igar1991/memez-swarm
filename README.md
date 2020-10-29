@@ -35,4 +35,6 @@ tar cf site.tar *
 
 curl  -X POST  -H "Content-Type: application/x-tar"  --data-binary @build.tar https://gateway.ethswarm.org/dirs
 
+https://gateway.ethswarm.org/bzz/2f768f7202123d909bab39c1f6a46bfc94c313192a3a114685433409499200d2/index.html
+
 
