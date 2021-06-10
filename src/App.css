@@ -4,9 +4,7 @@ html, body {
   background: #fff;
   color: #666;
 }
-.hello {
-  width: 100%;
-}
+
 .modal-dialog {
   width: max-content !important;
   max-width: 1000px !important; 
