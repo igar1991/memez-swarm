@@ -17,7 +17,7 @@ const NavBar = () => {
 
   return (
     <Navbar color="dark" light expand="md">
-      <NavbarBrand>MemeZzz</NavbarBrand>
+      <NavbarBrand className="logo-meme">MemeZzz</NavbarBrand>
       <NavbarToggler onClick={toggle} />
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>

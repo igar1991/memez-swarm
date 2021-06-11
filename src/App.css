@@ -27,6 +27,11 @@ html, body {
   margin-top: 1rem;
 }
 
+.logo-meme {
+  font-size: 3rem;
+  font-family: Impact;
+}
+
 .form-control:focus {
   border-color: #666;
 }
