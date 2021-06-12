@@ -3,6 +3,12 @@ import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MainRoute from "./components/MainRoute";
+import {
+  UploadFileComponent,
+  LoginComponent,
+  ListFilesComponent,
+  LoadFilesComponent,
+} from "fairdrive-protocol";
 
 const photos = [
   { src: "./images/dank.png" },
@@ -112,6 +118,13 @@ const photos = [
 ];
 
 const App = () => {
+  const [password, setPassword] = useState(null);
+  const [files, setFiles] = useState(null);
+  const [file, setFile] = useState(null);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openFilesList, setOpenFilesList] = useState(false);
+  const [openSaveFile, setOpenSaveFile] = useState(false);
+  const [uploadRes, setUploadRes] = useState(false);
 
   const page1arr=photos.slice(0,35);
   const page2arr=photos.slice(35,71);
@@ -147,6 +160,21 @@ const App = () => {
 
   return (
     <div>
+       <LoginComponent
+            setUserPassword={setPassword}
+            podName={"MemeZzz"}
+          ></LoginComponent>
+
+          {password && (
+        <LoadFilesComponent
+          password={password}
+          setFiles={setFiles}
+        ></LoadFilesComponent>
+      )}
+
+      {files && files.map(item=>{
+        console.log(item);
+      })}
       <NavBar />
       <MainRoute page1arr={page1arr} page2arr={page2arr} page3arr={page3arr} photos={photos} arraymeme={arraymeme} setMeme={setMeme} deleteMeme={deleteMeme} />
 
