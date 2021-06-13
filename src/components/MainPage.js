@@ -1,8 +1,18 @@
 import React from "react";
-import { Modal, ModalHeader, ModalBody, FormGroup, Label, Pagination, PaginationItem, PaginationLink  } from "reactstrap";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  Label,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+} from "reactstrap";
 import "../App.css";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
+import bg from "../bg.png";
 
 const initialState = {
   toptext: "",
@@ -134,8 +144,8 @@ class MainPage extends React.Component {
   uploadToSwarm = () => {
     const self = this;
     const svg = this.svgRef;
+    const dateNow = new Date().setUTCMilliseconds(100);
     let svgData = new XMLSerializer().serializeToString(svg);
-
     const canvas = document.createElement("canvas");
     canvas.setAttribute("id", "canvas");
     const svgSize = svg.getBoundingClientRect();
@@ -148,20 +158,22 @@ class MainPage extends React.Component {
     );
     img.onload = function () {
       canvas.getContext("2d").drawImage(img, 0, 0);
-      canvas.toBlob(function (blob) {
-        var formData = new FormData();
-        formData.append("file", blob, "image.jpg");
-        const url = "https://gateway.ethswarm.org/files";
-        fetch(url, {
+      canvas.toBlob(async function fileUpload(blob) {
+        console.log(blob)
+        let writePath = "/";
+        const formData = new FormData();
+        formData.append("files", blob, `${dateNow}.png`);
+        formData.append("pod_dir", writePath);
+        formData.append("block_size", "64Mb");
+
+        const uploadFiles = await axios({
+          baseURL: "https://api.fairos.io/v0/",
           method: "POST",
-          body: formData,
-        })
-          .then((data) => data.json())
-          .then((data) => {
-            self.props.setMeme(
-              "https://gateway.ethswarm.org/files/" + data.reference
-            );
-          });
+          url: "file/upload",
+          data: formData,
+          withCredentials: true
+        });
+        return true;
       }, "image/jpeg");
     };
   };
@@ -196,6 +208,26 @@ class MainPage extends React.Component {
       <div>
         <div className="main-content">
           <div className="content">
+          <div className="titleS" style={{ backgroundImage: `url(${bg})`, width: '100%'}}>
+            <div className="titleDiv"><p>Powered by SWARM</p></div>
+            <Pagination size="lg" aria-label="Page navigation example">
+          <PaginationItem>
+            <Link to="/">
+              <PaginationLink first>1</PaginationLink>
+            </Link>
+          </PaginationItem>
+          <PaginationItem>
+            <Link to="/2">
+              <PaginationLink>2</PaginationLink>
+            </Link>
+          </PaginationItem>
+          <PaginationItem>
+            <Link to="/3">
+              <PaginationLink>3</PaginationLink>
+            </Link>
+          </PaginationItem>
+        </Pagination>
+          </div>
             {this.state.currentArr.map((image, index) => (
               <div className="image-holder" key={image.src}>
                 <img
@@ -209,17 +241,7 @@ class MainPage extends React.Component {
             ))}
           </div>
         </div>
-        <Pagination size="lg" aria-label="Page navigation example">
-          <PaginationItem >
-          <Link to='/'><PaginationLink first>1</PaginationLink></Link>
-          </PaginationItem>
-          <PaginationItem>
-          <Link to='/2'><PaginationLink>2</PaginationLink></Link>
-          </PaginationItem>
-          <PaginationItem>
-          <Link to='/3'><PaginationLink>3</PaginationLink></Link>
-          </PaginationItem>
-        </Pagination>
+        
         <Modal
           className="meme-gen-modal"
           isOpen={this.state.modalIsOpen}

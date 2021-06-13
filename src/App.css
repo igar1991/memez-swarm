@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
+
 html, body {
   height: 100%;
   font-family: 'Lora', serif;
@@ -10,26 +12,12 @@ html, body {
   max-width: 1000px !important; 
 }
 
-.test1 {
-  height: 500px;
-  background-color: #000000;
-  width: 1000px;
-}
-.test2 {
-  background-color: aqua;
-  width: 200px;
-}
 .btn-primary {
-  background: #666 !important;
+  background: #FFC82C !important;
   border: none !important;
   outline: none !important;
   width: 100%;
   margin-top: 1rem;
-}
-
-.logo-meme {
-  font-size: 3rem;
-  font-family: Impact;
 }
 
 .form-control:focus {
@@ -44,16 +32,44 @@ html, body {
 
 .navbar-brand {
   display: block;
+  font-size: 2rem;
   text-align: center;
-  color: #FFF !important;
-  margin: 0px 0px 20px 0px;
+  color:  #FFC82C !important;
+  margin: 0px 0px 0px 0px;
   padding-bottom: 15px;
-  border-bottom: 1px solid #fff;
+  font-family: 'Lemon', cursive;
+
 }
 
+.navbar {
+  box-shadow: 5px 5px 1px 1px #444436;
+}
+
+.titleS {
+  font-family: 'Lemon', cursive;
+  text-align:  center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  color:  #FFC82C !important;
+  font-size: 3rem;
+  margin-bottom: -2rem;
+}
+.titleDiv {
+  background-color: #524D4D;
+  opacity: 0.8;
+}
+.modal-content {
+  font-family: 'Lemon', cursive;
+
+}
 .nav-item a {
   color: #FFF !important;
+  font-family: 'Lemon', cursive;
+  font-size: 1.5rem;
   margin-left: 3em;
+}
+.nav-item :active {
+  color:#FFC82C !important;
 }
 
 .navbar-text {
@@ -92,14 +108,18 @@ html, body {
 
 .image-holder {
   display: flex;
-  
-  height: 168px;
-  margin: 2.5px 2px;
+  height: 250px;
+  margin: 1rem;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
+  padding: 7px; 
+  background-color: #524D4D;
+
 }
 .image-con {
+  width: 200px;
   height: 100%;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .image-holder:hover {
@@ -113,13 +133,33 @@ html, body {
 
 .main-content {
   display: flex;
+  background-color: #2E2727;
+  padding-bottom: 200px;
+}
+.pagination {
+  padding-left: 1rem;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 4rem;
 }
 
+.pagination button {
+  background-color: #2E2727;
+  color: #FFC82C;
+}
 
+.makeStyles-title-14 {
+  font-size: 4rem !important;
+  color: #FFC82C !important;
+}
+.makeStyles-button-27 {
+  font-size: 2rem !important;
+  padding: 1rem !important;
+}
 .content {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .meme-bottom-caption {
