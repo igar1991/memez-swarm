@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Inside go inside app folder and run yarn
 
-Run ### `yarn link "fairdrive-protocol"`
+Run `yarn link "fairdrive-protocol"`
 
-Run ### `npm link ../../fairdrive-protocol/app/node_modules/react to avoid react hooks error that can happen when trying to run the project.`
+Run `npm link ../../fairdrive-protocol/app/node_modules/react to avoid react hooks error that can happen when trying to run the project.`
 
 ## Available Scripts
 
