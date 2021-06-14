@@ -1,20 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MainRoute from "./components/MainRoute";
-import axios from "axios";
-import { Redirect, useParams } from "react-router-dom";
-import qs from "querystring";
-import { Modal, ModalHeader, ModalBody } from "reactstrap";
 
+import { Modal, ModalBody } from "reactstrap";
 
-import {
-  UploadFileComponent,
-  LoginComponent,
-  ListFilesComponent,
-  LoadFilesComponent,
-} from "fairdrive-protocol";
+import { LoginComponent } from "fairdrive-protocol";
 
 const photos = [
   { src: "./images/dank.png" },
@@ -124,120 +116,37 @@ const photos = [
 ];
 
 const App = () => {
-  const params = useParams();
-  let path = params.path;
   const [password, setPassword] = useState(null);
-  const [files, setFiles] = useState(null);
-  const [file, setFile] = useState(null);
-  const [openLogin, setOpenLogin] = useState(false);
-  const [openFilesList, setOpenFilesList] = useState(false);
-  const [openSaveFile, setOpenSaveFile] = useState(false);
-  const [uploadRes, setUploadRes] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(true);
 
   const page1arr = photos.slice(0, 35);
   const page2arr = photos.slice(35, 70);
   const page3arr = photos.slice(70, 104);
 
-  const [arraymeme, setArraymeme] = useState([]);
-
-
   useEffect(() => {
     if (password) {
-      setModalIsOpen(false)
+      setModalIsOpen(false);
     } else {
-      setModalIsOpen(true)
+      setModalIsOpen(true);
     }
-    console.log(password)
-
   }, [password]);
-
-  const host ="https://api.fairos.io/v0/";
-
-  function urlPath(p) {
-    return p.replace(/&/g, "/");
-  }
-
-  const fileUpload = async (payload) => {
-    const {files, directory} = payload;
-    let writePath = "/";
-    const formData = new FormData();
-    for (const file of files) {
-      formData.append("files", file);
-    }
-    formData.append("pod_dir", writePath);
-    formData.append("block_size", "64Mb");
-  
-    const uploadFiles = await axios({
-      baseURL: host,
-      method: "POST",
-      url: "file/upload",
-      data: formData,
-      withCredentials: true,
-    });
-  
-    console.log(uploadFiles);
-    return true;
-  }
-
-  const handkerFileUpload=(files)=>{
-    fileUpload({files, directory: "/"})
-  }
-
-  const filePreview = async (file) => {
-    try {
-      const downloadFile = await axios({
-        baseURL: host,
-        method: "POST",
-        url: "file/download",
-        data: qs.stringify({ file: file }),
-        responseType: "blob",
-        withCredentials: true,
-      });
-      return downloadFile.data;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-
 
   return (
     <div>
-      {/* <input type='file' onChange={(e)=>handkerFileUpload(e.target.files)}></input>
-     
-
-      {password && (
-        <LoadFilesComponent
-          password={password}
-          setFiles={setFiles}
-        ></LoadFilesComponent>
-      )}
-      {files && (
-        <ListFilesComponent
-          password={password}
-          files={files}
-          setFile={setFile}
-        ></ListFilesComponent>
-      )}
-
-      {files &&
-        <button onClick={()=>filePreview(files[1].name)}>2</button>} */}
       <NavBar />
       <MainRoute
         page1arr={page1arr}
         page2arr={page2arr}
         page3arr={page3arr}
         photos={photos}
-        arraymeme={page1arr}
         password={password}
       />
-       <Modal isOpen={modalIsOpen} >
+      <Modal isOpen={modalIsOpen}>
         <ModalBody>
-        <LoginComponent
-        setUserPassword={setPassword}
-        podName={"MemeZzz"}
-      ></LoginComponent>
+          <LoginComponent
+            setUserPassword={setPassword}
+            podName={"MemeZzz"}
+          ></LoginComponent>
         </ModalBody>
       </Modal>
     </div>

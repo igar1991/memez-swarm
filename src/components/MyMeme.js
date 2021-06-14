@@ -3,21 +3,18 @@ import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import bg from "../bg.png";
 import axios from "axios";
 import qs from "querystring";
+import bee from "../bee.png";
 
-
-
-const host ="https://api.fairos.io/v0/";
-const podName = "Fairdrive";
-
+const host = "https://api.fairos.io/v0/";
 
 const getDirectory = async (payload) => {
-  const {password} = payload;
+  const { password } = payload;
   try {
     const openPod = await axios({
       baseURL: host,
       method: "POST",
       url: "pod/open",
-      data: qs.stringify({ password: password, pod: "Fairdrive"}),
+      data: qs.stringify({ password: password, pod: "Fairdrive" }),
       withCredentials: true,
     });
 
@@ -35,15 +32,12 @@ const getDirectory = async (payload) => {
   } catch (error) {
     throw error;
   }
-}
-
+};
 
 const MyMeme = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState(null);
-  const [blob, setBlob] = useState(null);
-  const [arrm, setArrm] = useState([]);
   let blobFile;
 
   const [files, setFiles] = useState(null);
@@ -55,9 +49,11 @@ const MyMeme = (props) => {
         password: props.password,
       });
 
-      const arr = res.entries.filter((i)=>i.content_type.includes('image'))
+      const arr = res.entries
+        .filter((i) => i.content_type.includes("image"))
+        .reverse();
       setFiles(arr);
-      console.log(arr)
+      console.log(arr);
       getDirectory({
         directory: "/",
         password: props.password,
@@ -81,14 +77,7 @@ const MyMeme = (props) => {
     } catch (error) {
       throw error;
     }
-  }
-
-  const openR = async (file)=> {
-    blobFile = window.URL.createObjectURL(
-      await filePreview("/" + file.name)
-    );
-    return blobFile
-  }
+  };
 
   useEffect(() => {
     loadDirectory();
@@ -107,27 +96,36 @@ const MyMeme = (props) => {
     setCurrentImage(blobFile);
   };
 
-
   return (
     <div>
-      <div className="titleS" style={{ backgroundImage: `url(${bg})`, width: '100%'}}>
-            <div className="titleDiv"><p>Powered by SWARM</p></div>
-            <div><p>My Memes</p></div>
-            </div>
+      <div
+        className="titleS"
+        style={{ backgroundImage: `url(${bg})`, width: "100%" }}
+      >
+        <div className="titleDiv">
+          <p>My meme bees</p>
+        </div>
+      </div>
       <div className="main-content">
         <div className="content">
-          {files&&files.map((image, index) => {
-            return (
-            <div className="image-holder" key={index}>
-              <img
-                className="image-con"
-                alt={index}
-                src={props.arraymeme[1].src}
-                role="presentation"
-                onClick={() => openImage(index)}
-              />
-            </div>
-           )})} 
+          {files ? (
+            files.map((image, index) => {
+              return (
+                <div className="image-holder" key={index}>
+                  <img
+                    className="image-con"
+                    alt={index}
+                    src={bee}
+                    role="presentation"
+                    onClick={() => openImage(index)}
+                  />
+                  <h3>Meme #{++index}</h3>
+                </div>
+              );
+            })
+          ) : (
+            <h1 className="titleS">Loading bees...</h1>
+          )}
         </div>
       </div>
       <Modal isOpen={modalIsOpen} toggle={toggle}>

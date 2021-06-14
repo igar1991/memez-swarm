@@ -159,7 +159,7 @@ class MainPage extends React.Component {
     img.onload = function () {
       canvas.getContext("2d").drawImage(img, 0, 0);
       canvas.toBlob(async function fileUpload(blob) {
-        console.log(blob)
+        console.log(blob);
         let writePath = "/";
         const formData = new FormData();
         formData.append("files", blob, `${dateNow}.png`);
@@ -171,7 +171,7 @@ class MainPage extends React.Component {
           method: "POST",
           url: "file/upload",
           data: formData,
-          withCredentials: true
+          withCredentials: true,
         });
         return true;
       }, "image/jpeg");
@@ -208,26 +208,31 @@ class MainPage extends React.Component {
       <div>
         <div className="main-content">
           <div className="content">
-          <div className="titleS" style={{ backgroundImage: `url(${bg})`, width: '100%'}}>
-            <div className="titleDiv"><p>Powered by SWARM</p></div>
-            <Pagination size="lg" aria-label="Page navigation example">
-          <PaginationItem>
-            <Link to="/">
-              <PaginationLink first>1</PaginationLink>
-            </Link>
-          </PaginationItem>
-          <PaginationItem>
-            <Link to="/2">
-              <PaginationLink>2</PaginationLink>
-            </Link>
-          </PaginationItem>
-          <PaginationItem>
-            <Link to="/3">
-              <PaginationLink>3</PaginationLink>
-            </Link>
-          </PaginationItem>
-        </Pagination>
-          </div>
+            <div
+              className="titleS"
+              style={{ backgroundImage: `url(${bg})`, width: "100%" }}
+            >
+              <div className="titleDiv">
+                <p>Powered by SWARM</p>
+              </div>
+              <Pagination size="lg" aria-label="Page navigation example">
+                <PaginationItem>
+                  <Link to="/">
+                    <PaginationLink first>1</PaginationLink>
+                  </Link>
+                </PaginationItem>
+                <PaginationItem>
+                  <Link to="/2">
+                    <PaginationLink>2</PaginationLink>
+                  </Link>
+                </PaginationItem>
+                <PaginationItem>
+                  <Link to="/3">
+                    <PaginationLink>3</PaginationLink>
+                  </Link>
+                </PaginationItem>
+              </Pagination>
+            </div>
             {this.state.currentArr.map((image, index) => (
               <div className="image-holder" key={image.src}>
                 <img
@@ -241,7 +246,7 @@ class MainPage extends React.Component {
             ))}
           </div>
         </div>
-        
+
         <Modal
           className="meme-gen-modal"
           isOpen={this.state.modalIsOpen}
@@ -324,7 +329,10 @@ class MainPage extends React.Component {
                 Download to Device
               </button>
               <button
-                onClick={() => this.uploadToSwarm()}
+                onClick={() => {
+                  this.uploadToSwarm();
+                  this.toggle();
+                }}
                 className="btn btn-primary"
               >
                 Upload to Swarm

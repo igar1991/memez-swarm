@@ -108,11 +108,16 @@ html, body {
 
 .image-holder {
   display: flex;
+  flex-direction: column;
+  text-align: center;
   height: 250px;
   margin: 1rem;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
   padding: 7px; 
   background-color: #524D4D;
+  font-family: 'Lemon', cursive;
+  color:  #FFC82C !important;
+  
 
 }
 .image-con {

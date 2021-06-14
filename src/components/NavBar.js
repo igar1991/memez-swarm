@@ -6,7 +6,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavbarText,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
