@@ -123,7 +123,7 @@ const MyMeme = (props) => {
                     role="presentation"
                     onClick={() => openImage(index)}
                   />
-                  <h3>Meme #{++index}</h3>
+                  <h3>Meme #{index+1}</h3>
                 </div>
               );
             })
