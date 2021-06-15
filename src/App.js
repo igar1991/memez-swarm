@@ -10,6 +10,7 @@ import { LoginComponent } from "fairdrive-protocol";
 
 const photos = [
   { src: "./images/dank.png" },
+  { src: "./images/scale_1200.jpg" },
   { src: "./images/band.png" },
   { src: "./images/Always-Has-Been.png" },
   { src: "./images/American-Chopper-Argument.jpg" },

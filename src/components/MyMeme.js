@@ -49,9 +49,7 @@ const MyMeme = (props) => {
         password: props.password,
       });
 
-      const arr = res.entries
-        .filter((i) => i.content_type.includes("image"))
-        .reverse();
+      const arr = res.entries.filter((i) => i.content_type.includes("image"))
       setFiles(arr);
       console.log(arr);
       getDirectory({
@@ -81,6 +79,7 @@ const MyMeme = (props) => {
 
   useEffect(() => {
     loadDirectory();
+    console.log(files)
   }, []);
 
   const toggle = () => {
@@ -88,12 +87,17 @@ const MyMeme = (props) => {
   };
 
   const openImage = async (index) => {
-    blobFile = window.URL.createObjectURL(
-      await filePreview("/" + files[index].name)
-    );
-    setModalIsOpen(!modalIsOpen);
+    if(files[index].name) {
+      blobFile = window.URL.createObjectURL(
+        await filePreview("/" + files[index].name)
+      );
+      setModalIsOpen(!modalIsOpen);
     setCurrentIndex(index);
     setCurrentImage(blobFile);
+    }else {
+      console.log("noname", files[index].name)
+    }
+    
   };
 
   return (

@@ -197,7 +197,7 @@ class MainPage extends React.Component {
     let newHeight = newWidth / wrh;
     const textStyle = {
       fontFamily: "Impact",
-      fontSize: "50px",
+      fontSize: "40px",
       textTransform: "uppercase",
       fill: "#FFF",
       stroke: "#000",

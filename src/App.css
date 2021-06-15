@@ -139,7 +139,7 @@ html, body {
 .main-content {
   display: flex;
   background-color: #2E2727;
-  padding-bottom: 200px;
+  padding-bottom: 500px;
 }
 .pagination {
   padding-left: 1rem;
