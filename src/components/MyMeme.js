@@ -80,7 +80,7 @@ const MyMeme = (props) => {
   useEffect(() => {
     loadDirectory();
     console.log(files)
-  });
+  },[]);
 
   const toggle = () => {
     setModalIsOpen(!modalIsOpen);

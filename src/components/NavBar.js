@@ -26,6 +26,9 @@ const NavBar = () => {
           <NavItem>
             <Link to="/mymeme">My Uploads</Link>
           </NavItem>
+          <NavItem>
+            <a target="_blank" href="http://localhost:1633/">Fairdrive</a>
+          </NavItem>
         </Nav>
       </Collapse>
     </Navbar>
